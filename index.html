@@ -7,11 +7,9 @@
     <title>Document</title>
 </head>
 <body>
-    <fb:login-button 
-    scope="public_profile,email"
-    onlogin="checkLoginState();">
-    </fb:login-button>
-  
+        <div id="fb-root"></div>
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v3.2&appId=459422911471748&autoLogAppEvents=1"></script>
+        <div class="fb-login-button" data-size="large" data-button-type="login_with" data-auto-logout-link="false" data-use-continue-as="false"></div>
     <script>
         function checkLoginState() {
             FB.getLoginStatus(function(response) {
