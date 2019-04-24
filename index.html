@@ -39,9 +39,9 @@
                 <div class="dashboard">
                     <div class="container">
 
-                        <div class="visible-data">
-                        <!-- when logged in -->
-                                <h3>PIKCZER</h3>
+                        <div id="fbData" class="visible-data">
+
+                                <h3>USER PROFILE</h3>
                                 <div class="image">
                                     <img id="facebookimg"src="">
                                     
@@ -52,8 +52,8 @@
                                     <li id="lastname">Last name</li>
                                 </ul>
                         </div>
-                        <!-- when not logged in -->
-                        <button class="facebook-login" onclick="logIn()">Login with facebook</button>
+
+                        <button id="fbButton" class="facebook-login" onclick="logIn()">Login with facebook</button>
                     </div>
                 </div> 
   
@@ -70,7 +70,13 @@
             }
 
 
+            function setVisible(){
+                var fbData = document.getElementById("fbData");
+                var fbButton = document.getElementById("fbButton");
 
+                fbData.style.display = fbData.style.display === 'none' ? 'block' : 'none';
+                fbButton.style.display = fbButton.style.display === 'block' ? 'none' : 'block';
+            }
 
             var userData = {
                 name: "",
@@ -88,13 +94,16 @@
                             userData.firstName = user_data.first_name;
                             userData.lastName = user_data.last_name;
                             userData.picture = user_data.picture.data.url;
-
-                            setUserData(userData.name, userData.firstName, userData.lastName, userData.picture);
+                            setUserData(userData.name, userData.firstName, userData.lastName, userData.picture);                
+                            setVisible();
                        })
                    }
                 },{scope: 'public_profile'})
             };
 
+            function logOut(){
+                
+            }
             window.fbAsyncInit = function() {
               FB.init({
                     appId      : '459422911471748',

@@ -220,6 +220,9 @@ body{
     text-transform: uppercase;
     letter-spacing: 1px;
 }
+.visible-data{
+    display: none;
+}
 .facebook-login{
     border-radius: 20px;
     border: 1px solid #FF4B2B;
@@ -230,6 +233,7 @@ body{
     padding: 12px 45px;
     letter-spacing: 1px;
     cursor: pointer;
+    display: block;
 }
 
 @media(max-width: 830px){
