@@ -4,55 +4,117 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:200,600" rel="stylesheet"> 
+    <link rel="stylesheet" href="style.css">
+    <script
+    src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
     <title>Document</title>
 </head>
 <body>
+    
+    <div class="grid-container">
+                <div class="navbar">
+                    <ul class="banner">
+                        <li>Programowanie w internecie</li>
+                    </ul>
+                    <ul class="author">
+                            <li>Michał Maciocha</li>
+                    </ul>
+                </div> 
 
-        <button onclick="logIn()">Login with facebook</button>
+                <div class="sidebar">
+                    <ul class="menu">
+                        <li>
+                           <a href ="http://www.mmaciocha.cba.pl">Main page <span></span></a> 
+                        </li>
+                        <li  class="active">
+                            <a>Facebook<span>Login page</span></a>
+                        </li>
+                    </ul>
+                    <ul id="mobile-menu" class="hamburger_menu">
+                    </ul>
+                </div>
+                <div class="dashboard">
+                    <div class="container">
+
+                        <div class="visible-data">
+                        <!-- when logged in -->
+                                <h3>PIKCZER</h3>
+                                <div class="image">
+                                    <img id="facebookimg"src="">
+                                    
+                                </div>
+                                <ul>
+                                    <li id="name">Name</li>
+                                    <li id="firstname">First name</li>
+                                    <li id="lastname">Last name</li>
+                                </ul>
+                        </div>
+                        <!-- when not logged in -->
+                        <button class="facebook-login" onclick="logIn()">Login with facebook</button>
+                    </div>
+                </div> 
+  
+    
+    </div>
+
+    <script>
+
+            function setUserData(name, firstName, lastName, imgUrl){
+                document.getElementById("facebookimg").src = imgUrl;
+                document.getElementById("name").innerHTML = name;
+                document.getElementById("firstname").innerHTML = firstName;
+                document.getElementById("lastname").innerHTML = lastName;
+            }
 
 
-        <script>
 
-                var userData = {
-                    userID: "",
-                    name: "",
-                    firstName: "",
-                    lastName: "",
-                    picture: ""
-                }
-                function logIn(){
-                    FB.login(function(response){
-                       if(response.status == "connected"){
-                           userData.userID = response.authResponse.userID;
-                           FB.api('/me?fields=id,name,first_name,last_name,picture.type(large)'
-                           , (user_data)=>{
-                                console.log(user_data);
 
-                           })
-                       }
-                    },{scope: 'public_profile'})
-                };
+            var userData = {
+                name: "",
+                firstName: "",
+                lastName: "",
+                picture: ""
+            }
+            function logIn(){
+                FB.login(function(response){
+                   if(response.status == "connected"){
+                       userData.userID = response.authResponse.userID;
+                       FB.api('/me?fields=id,name,first_name,last_name,picture.type(large)'
+                       , (user_data)=>{
+                            userData.name = user_data.name;
+                            userData.firstName = user_data.first_name;
+                            userData.lastName = user_data.last_name;
+                            userData.picture = user_data.picture.data.url;
 
-                window.fbAsyncInit = function() {
-                  FB.init({
-                        appId      : '459422911471748',
-                        cookie     : true,
-                        xfbml      : true,
-                        version    : 'v3.2'
-                  });
-                    
-                  FB.AppEvents.logPageView();   
-                    
-                };
-              
-                (function(d, s, id){
-                   var js, fjs = d.getElementsByTagName(s)[0];
-                   if (d.getElementById(id)) {return;}
-                   js = d.createElement(s); js.id = id;
-                   js.src = "https://connect.facebook.net/en_US/sdk.js";
-                   fjs.parentNode.insertBefore(js, fjs);
-                 }(document, 'script', 'facebook-jssdk'));
-              </script>    
+                            setUserData(userData.name, userData.firstName, userData.lastName, userData.picture);
+                       })
+                   }
+                },{scope: 'public_profile'})
+            };
+
+            window.fbAsyncInit = function() {
+              FB.init({
+                    appId      : '459422911471748',
+                    cookie     : true,
+                    xfbml      : true,
+                    version    : 'v3.2'
+              });
+                
+              FB.AppEvents.logPageView();   
+                
+            };
+          
+            (function(d, s, id){
+               var js, fjs = d.getElementsByTagName(s)[0];
+               if (d.getElementById(id)) {return;}
+               js = d.createElement(s); js.id = id;
+               js.src = "https://connect.facebook.net/en_US/sdk.js";
+               fjs.parentNode.insertBefore(js, fjs);
+             }(document, 'script', 'facebook-jssdk'));
+          </script>  
+
 </body>
 </html>
-
