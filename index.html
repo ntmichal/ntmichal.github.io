@@ -43,8 +43,7 @@
 
                                 <h3>USER PROFILE</h3>
                                 <div class="image">
-                                    <img id="facebookimg"src="">
-                                    
+                                    <img id="facebookimg" src="#" alt="User profile photo">
                                 </div>
                                 <ul>
                                     <li id="name">Name</li>
@@ -60,82 +59,10 @@
   
     
     </div>
-
-    <script>
-
-            function setUserData(name, firstName, lastName, imgUrl){
-                document.getElementById("facebookimg").src = imgUrl;
-                document.getElementById("name").innerHTML = name;
-                document.getElementById("firstname").innerHTML = firstName;
-                document.getElementById("lastname").innerHTML = lastName;
-            }
-
-
-            function setVisible(){
-                var fbData = document.getElementById("fbData");
-                var fbButton = document.getElementById("fbButton");
-
-
-                fbData.style.display = fbData.style.display === 'none' ? 'block' : 'none';
-                fbButton.style.display = fbButton.style.display === 'block' ? 'none' : 'block';
-            }
-
-            var userData = {
-                name: "",
-                firstName: "",
-                lastName: "",
-                picture: ""
-            }
-            function logIn(){
-
-                FB.login(function(response){
-                   if(response.status == "connected"){
-                       userData.userID = response.authResponse.userID;
-                       FB.api('/me?fields=id,name,first_name,last_name,picture.type(large)'
-                       , (user_data)=>{
-                            userData.name = user_data.name;
-                            userData.firstName = user_data.first_name;
-                            userData.lastName = user_data.last_name;
-                            userData.picture = user_data.picture.data.url;
-                            setUserData(userData.name, userData.firstName, userData.lastName, userData.picture);                
-                            setVisible();
-                       })
-                   }
-                },{scope: 'public_profile'})
-            };
-
-            function logOut(){
-                FB.logout(function(response) {
-                    setVisible();
-                    userData = {
-                        name: "",
-                        firstName: "",
-                        lastName: "",
-                        picture: ""
-                    }
-                });
-
-            }
-            window.fbAsyncInit = function() {
-              FB.init({
-                    appId      : '459422911471748',
-                    cookie     : true,
-                    xfbml      : true,
-                    version    : 'v3.2'
-              });
-                
-              FB.AppEvents.logPageView();   
-                
-            };
-          
-            (function(d, s, id){
-               var js, fjs = d.getElementsByTagName(s)[0];
-               if (d.getElementById(id)) {return;}
-               js = d.createElement(s); js.id = id;
-               js.src = "https://connect.facebook.net/en_US/sdk.js";
-               fjs.parentNode.insertBefore(js, fjs);
-             }(document, 'script', 'facebook-jssdk'));
-          </script>  
+<script src="script-minify.js"></script>
+<script>
+        $(".dashboard").load("./pages/page0.html"),$(".sidebar ul li").click(function(e){e.preventDefault,$(this).addClass("active").siblings().removeClass("active");var a="./pages/page"+$(".sidebar ul li").index(this)+".html";$(".dashboard").load(a)}),$(".sidebar").click(function(e){$(window).width()<=522&&($(".sidebar .menu").toggle(),$(".sidebar .hamburger_menu").toggle())}),$(window).on("resize",function(){var e=$(this);e.width()>522&&($(".sidebar ul").css("display","block"),$(".sidebar .hamburger_menu").toggle()),e.width()<522&&($(".sidebar ul").css("display","none"),$(".sidebar .hamburger_menu").toggle())});
+</script>
 
 </body>
 </html>
