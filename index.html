@@ -12,9 +12,24 @@
 
 
         <script>
+
+                var userData = {
+                    userID: "",
+                    name: "",
+                    firstName: "",
+                    lastName: "",
+                    picture: ""
+                }
                 function logIn(){
                     FB.login(function(response){
-                        console.log(response);
+                       if(response.status == "connected"){
+                           userData.userID = response.authResponse.userID;
+                           FB.api('/me?fields=id,name,first_name,last_name,picture.type(large)'
+                           , (user_data)=>{
+                                console.log(user_data);
+
+                           })
+                       }
                     },{scope: 'public_profile'})
                 };
 
