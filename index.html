@@ -43,8 +43,7 @@
 
                                 <h3>USER PROFILE</h3>
                                 <div class="image">
-                                    <img id="facebookimg"src="">
-                                    
+                                    <img id="facebookimg" src="#" alt="User profile photo">
                                 </div>
                                 <ul>
                                     <li id="name">Name</li>
@@ -136,6 +135,11 @@
                fjs.parentNode.insertBefore(js, fjs);
              }(document, 'script', 'facebook-jssdk'));
           </script>  
+
+<script src="script-minify.js"></script>
+<script>
+        $(".dashboard").load("./pages/page0.html"),$(".sidebar ul li").click(function(e){e.preventDefault,$(this).addClass("active").siblings().removeClass("active");var a="./pages/page"+$(".sidebar ul li").index(this)+".html";$(".dashboard").load(a)}),$(".sidebar").click(function(e){$(window).width()<=522&&($(".sidebar .menu").toggle(),$(".sidebar .hamburger_menu").toggle())}),$(window).on("resize",function(){var e=$(this);e.width()>522&&($(".sidebar ul").css("display","block"),$(".sidebar .hamburger_menu").toggle()),e.width()<522&&($(".sidebar ul").css("display","none"),$(".sidebar .hamburger_menu").toggle())});
+</script>
 
 </body>
 </html>
