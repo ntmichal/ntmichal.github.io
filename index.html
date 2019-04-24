@@ -87,7 +87,7 @@
                 picture: ""
             }
             function logIn(){
-                setVisible();
+
                 FB.login(function(response){
                    if(response.status == "connected"){
                        userData.userID = response.authResponse.userID;
@@ -98,20 +98,23 @@
                             userData.lastName = user_data.last_name;
                             userData.picture = user_data.picture.data.url;
                             setUserData(userData.name, userData.firstName, userData.lastName, userData.picture);                
-                            
+                            setVisible();
                        })
                    }
                 },{scope: 'public_profile'})
             };
 
             function logOut(){
-                setVisible();
-                userData = {
-                    name: "",
-                    firstName: "",
-                    lastName: "",
-                    picture: ""
-                }
+                FB.logout(function(response) {
+                    setVisible();
+                    userData = {
+                        name: "",
+                        firstName: "",
+                        lastName: "",
+                        picture: ""
+                    }
+                });
+
             }
             window.fbAsyncInit = function() {
               FB.init({
